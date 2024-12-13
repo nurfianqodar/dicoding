@@ -1,0 +1,35 @@
+{
+	"name": "asclepius-api",
+	"version": "1.0.0",
+	"description": "Asclepius backend API",
+	"main": "src/index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/nurfianqodar/dicoding.git#asclepius-api"
+	},
+	"author": "Nurfian Qodar",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/nurfianqodar/dicoding/issues"
+	},
+	"homepage": "https://github.com/nurfianqodar/dicoding/tree/asclepius-api#readme",
+	"dependencies": {
+		"@google-cloud/firestore": "^7.11.0",
+		"@tensorflow/tfjs-node": "^3.21.1",
+		"dotenv": "^16.4.7",
+		"express": "^4.21.2",
+		"multer": "^1.4.5-lts.1",
+		"uuid": "^11.0.3"
+	},
+	"devDependencies": {
+		"@types/express": "^5.0.0",
+		"@types/multer": "^1.4.12",
+		"@types/node": "^22.10.2",
+		"@types/uuid": "^10.0.0",
+		"newman": "^6.2.1",
+		"nodemon": "^3.1.9"
+	}
+}

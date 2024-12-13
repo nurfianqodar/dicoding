@@ -1,0 +1,12 @@
+.git
+.gitignore
+.prettierrc
+
+.vscode/
+
+node_modules/
+tests/
+
+node_version.txt
+README.md
+publish.sh
