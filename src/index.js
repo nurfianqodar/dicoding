@@ -5,7 +5,7 @@ const { loadModel } = require("./libs/tensorflow");
 const { predictErrorMiddleware } = require("./middleware/error.middleware");
 
 const app = express();
-const appPort = process.env.APP_PORT;
+const appPort = process.env.PORT;
 dotenv.config();
 
 app.use(express.json());

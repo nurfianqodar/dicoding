@@ -5,9 +5,14 @@ newman.run(
 	{
 		collection: `${BASE_DIR}/Asclepius.postman_collection.json`,
 		reporters: "cli",
-		envVar: [{ key: "baseUrl", value: "http://127.0.0.1:8000" }],
+		envVar: [
+			{
+				key: "baseUrl",
+				value: "https://backend-1039489937909.asia-southeast2.run.app",
+			},
+		],
 		workingDir: `${BASE_DIR}/`,
-		delayRequest: 200,
+		delayRequest: 2000,
 	},
 	(err) => {
 		if (err) {

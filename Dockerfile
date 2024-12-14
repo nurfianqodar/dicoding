@@ -11,7 +11,7 @@ COPY src/ /app/src/
 
 EXPOSE 8000
 
-ENV APP_PORT=8000
-ENV MODEL_URL=
+ENV PORT=8000
+ENV MODEL_URL="https://storage.googleapis.com/submissionmlgc-nurfianqodar-bucket/models/model.json"
 
 CMD [ "node", "/app/src/index.js" ]
