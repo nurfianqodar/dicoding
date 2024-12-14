@@ -4,7 +4,10 @@
 const multer = require("multer");
 const { Router } = require("express");
 const { memoryStorage } = require("multer");
-const { predictHandler } = require("../handlers/predict.handler");
+const {
+	predictHandler,
+	historiesHandler,
+} = require("../handlers/predict.handler");
 const { predictErrorMiddleware } = require("../middleware/error.middleware");
 const storage = memoryStorage();
 const upload = multer({ storage });
@@ -16,5 +19,6 @@ predictRoute.post(
 	upload.single("image"),
 	predictHandler
 );
+predictRoute.get("/histories", historiesHandler);
 
 module.exports = predictRoute;

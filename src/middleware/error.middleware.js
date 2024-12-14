@@ -8,8 +8,7 @@ const { ContentTooLargeError, PredictError } = require("../utils/errors");
  * @param {import("express").NextFunction} next
  */
 const predictErrorMiddleware = async (err, _, res, next) => {
-	console.log("error middleware");
-	console.error(`error: ${err.message}`);
+	console.error(`error: ${err}`);
 	if (err instanceof ContentTooLargeError) {
 		res.status(err.getStatusCode());
 		res.json(err.getResponse());

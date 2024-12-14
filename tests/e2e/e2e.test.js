@@ -7,6 +7,7 @@ newman.run(
 		reporters: "cli",
 		envVar: [{ key: "baseUrl", value: "http://127.0.0.1:8000" }],
 		workingDir: `${BASE_DIR}/`,
+		delayRequest: 200,
 	},
 	(err) => {
 		if (err) {

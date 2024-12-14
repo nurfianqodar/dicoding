@@ -1,8 +1,10 @@
 const tf = require("@tensorflow/tfjs-node");
 const { getModel } = require("../libs/tensorflow");
 const { PredictError, ContentTooLargeError } = require("../utils/errors");
+const { predicttionsCollection } = require("../libs/firestore");
 const { PredictResult } = require("../schemas/predict.schema");
 const HTTPResponse = require("../utils/response");
+
 /**
  * **predictHandler**
  *
@@ -41,6 +43,12 @@ const predictHandler = async (req, res, next) => {
 
 		// Predict Interpretation
 		const predictResult = new PredictResult(confidenceScore);
+
+		// Save to firestore
+		const docRef = predicttionsCollection.doc(predictResult.id);
+		await docRef.create({ ...predictResult });
+
+		// Response
 		const response = new HTTPResponse(
 			201,
 			"success",
@@ -49,9 +57,34 @@ const predictHandler = async (req, res, next) => {
 		);
 		res.status(response.getStatusCode());
 		res.json(response.getResponse());
-	} catch {
-		next(new PredictError());
+	} catch (err) {
+		next(err);
 	}
 };
 
-module.exports = { predictHandler };
+/**
+ * **historiesHandler**
+ *
+ * Handle upload image for prediction
+ * Use multer middleware!!
+ *
+ * @type {import("express").Handler}
+ * @param {import("express").Request} req
+ * @param {import("express").Response} res
+ */
+const historiesHandler = async (req, res, next) => {
+	try {
+		const data = [];
+
+		const colls = await predicttionsCollection.listDocuments();
+		colls.map(async (doc) => {
+			data.push(doc);
+		});
+		const response = new HTTPResponse(200, "success", undefined, data);
+		res.status(response.getStatusCode());
+		res.json(response.getResponse());
+	} catch (err) {
+		next(err);
+	}
+};
+module.exports = { predictHandler, historiesHandler };
