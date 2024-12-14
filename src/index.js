@@ -1,11 +1,22 @@
 const dotenv = require("dotenv");
 const express = require("express");
-const app = express();
-dotenv.config();
-const port = process.env.APP_PORT;
+const predictRoute = require("./routers/predict.route");
+const { loadModel } = require("./libs/tensorflow");
+const { predictErrorMiddleware } = require("./middleware/error.middleware");
 
-app.listen(port, () => {
-	console.log(`Server running at port ${port}`);
+const app = express();
+const appPort = process.env.APP_PORT;
+dotenv.config();
+
+app.use(express.json());
+
+app.use("/predict", predictRoute);
+
+app.use(predictErrorMiddleware);
+
+app.listen(appPort, async () => {
+	await loadModel();
+	console.log(`Server running at port ${appPort}`);
 });
 
 process.on("SIGINT", () => {
