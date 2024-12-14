@@ -1,10 +1,12 @@
 const dotenv = require("dotenv");
 const express = require("express");
 const predictRoute = require("./routers/predict.route");
+const cors = require("cors")
 const { loadModel } = require("./libs/tensorflow");
 const { predictErrorMiddleware } = require("./middleware/error.middleware");
 
 const app = express();
+app.use(cors())
 const appPort = process.env.PORT;
 dotenv.config();
 
